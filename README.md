@@ -76,9 +76,7 @@ Every companion has 5 stats rolled at creation:
 
 ## Install
 
-```bash
-bun add github:RAPIDENN/Devmochi
-```
+Install locally (for the demo): `./scripts/run-buddy.sh` handles deps.
 
 ---
 
@@ -94,3 +92,13 @@ console.log(companion?.name, companion?.species, companion?.rarity)
 // Render in terminal (Ink)
 <CompanionSprite />
 ```
+
+### One-liner demo
+
+```bash
+./scripts/run-buddy.sh
+```
+
+Notes:
+- Uses `~/.bun/bin/bun`; set `BUN_BIN=/path/to/bun` if different.
+- Creates `~/.devmochi/config.json` with `userID=$(whoami)` if missing (override with `BUDDY_USER_ID=...`).

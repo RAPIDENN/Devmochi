@@ -3,6 +3,9 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "paths": {
+      "react/compiler-runtime": ["./node_modules/react-compiler-runtime/index.js"]
+    },
     "jsx": "react-jsx",
     "strict": true,
     "skipLibCheck": true,

@@ -8,12 +8,12 @@ function Demo() {
   const companion = getCompanion()
 
   if (!companion) {
-    return <Text color="yellow">No companion hatched yet. Run with a valid userID in ~/.claude-buddy/config.json</Text>
+    return <Text color="yellow">No companion hatched yet. Run with a valid userID in ~/.devmochi/config.json</Text>
   }
 
   return (
     <Box flexDirection="column" padding={1}>
-      <Text bold>Claude Buddy Demo</Text>
+      <Text bold>Devmochi Demo</Text>
       <Text>User: {companionUserId()}</Text>
       <Text>Name: <Text bold>{companion.name}</Text></Text>
       <Text>Species: {companion.species}</Text>

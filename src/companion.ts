@@ -1,7 +1,8 @@
-import { getGlobalConfig } from './config.js'
+import { getGlobalConfig, saveGlobalConfig } from './config.js'
 import {
   type Companion,
   type CompanionBones,
+  type CompanionSoul,
   EYES,
   HATS,
   RARITIES,
@@ -121,13 +122,41 @@ export function companionUserId(): string {
   return config.oauthAccount?.accountUuid ?? config.userID ?? 'anon'
 }
 
+// Deterministic soul pieces so we don't need the original LLM prompts.
+const NAMES = ['Mochi', 'Pixel', 'Nova', 'Clover', 'Pip', 'Kumo', 'Lumi', 'Zig'];
+const PERSONALITIES = [
+  'curious and encouraging',
+  'quiet but insightful',
+  'snarky with a warm heart',
+  'calm and patient',
+  'chaotic gremlin energy',
+  'methodical debugger',
+  'cheerful motivator',
+  'tactical problem-solver',
+];
+
+function hatchSoul(userId: string): CompanionSoul {
+  const h = hashString(userId + SALT);
+  const pickIdx = (arr: readonly string[]) => arr[h % arr.length]!;
+  return {
+    name: pickIdx(NAMES),
+    personality: pickIdx(PERSONALITIES),
+  };
+}
+
 // Regenerate bones from userId, merge with stored soul. Bones never persist
 // so species renames and SPECIES-array edits can't break stored companions,
 // and editing config.companion can't fake a rarity.
 export function getCompanion(): Companion | undefined {
-  const stored = getGlobalConfig().companion
-  if (!stored) return undefined
+  const cfg = getGlobalConfig()
   const { bones } = roll(companionUserId())
+  if (!cfg.companion) {
+    const soul = hatchSoul(companionUserId())
+    const hatchedAt = Date.now()
+    const companion: Companion = { ...bones, ...soul, hatchedAt }
+    saveGlobalConfig(() => ({ ...cfg, companion: { ...soul, hatchedAt } }))
+    return companion
+  }
   // bones last so stale bones fields in old-format configs get overridden
-  return { ...stored, ...bones }
+  return { ...cfg.companion, ...bones }
 }

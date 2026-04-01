@@ -1,8 +1,8 @@
 {
-  "name": "claude-buddy",
+  "name": "devmochi",
   "version": "0.1.0",
   "type": "module",
-  "description": "Companion sprite system extracted from Claude Code 2.1.88",
+  "description": "Devmochi – terminal companion sprite",
   "main": "src/index.ts",
   "exports": {
     ".": "./src/index.ts"
@@ -11,13 +11,15 @@
     "dev": "bun src/demo.tsx"
   },
   "dependencies": {
+    "figures": "^6.1.0",
     "ink": "^5.2.0",
-    "react": "^19.0.0",
+    "react": "18.2.0",
+    "react-compiler-runtime": "^1.0.0",
     "string-width": "^7.2.0",
     "zustand": "^5.0.0"
   },
   "devDependencies": {
-    "@types/react": "^19.0.0",
+    "@types/react": "18.2.37",
     "bun-types": "latest",
     "typescript": "^5.0.0"
   }

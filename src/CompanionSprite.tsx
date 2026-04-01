@@ -1,5 +1,3 @@
-import { c as _c } from "react/compiler-runtime";
-
 import figures from 'figures';
 import React, { useEffect, useRef, useState } from 'react';
 import { useStdout } from 'ink';
@@ -25,6 +23,8 @@ const IDLE_SEQUENCE = [0, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 2, 0, 0, 0];
 // Hearts float up-and-out over 5 ticks (~2.5s). Prepended above the sprite.
 const H = figures.heart;
 const PET_HEARTS = [`   ${H}    ${H}   `, `  ${H}  ${H}   ${H}  `, ` ${H}   ${H}  ${H}   `, `${H}  ${H}      ${H} `, '·    ·   ·  '];
+// Render helper (was react/compiler-runtime). Simple array to keep JSX cache happy.
+const _c = (len: number) => new Array<any>(len).fill(undefined);
 function wrap(text: string, width: number): string[] {
   const words = text.split(' ');
   const lines: string[] = [];

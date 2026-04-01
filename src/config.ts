@@ -10,7 +10,7 @@ export type BuddyConfig = {
   companionMuted?: boolean
 }
 
-const CONFIG_DIR = join(homedir(), '.claude-buddy')
+const CONFIG_DIR = join(homedir(), '.devmochi')
 const CONFIG_FILE = join(CONFIG_DIR, 'config.json')
 
 let _config: BuddyConfig | null = null
